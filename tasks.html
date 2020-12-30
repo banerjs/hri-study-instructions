@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Instructions: Tasks</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+  <!-- General instructions -->
+  <nav class="navbar fixed-top navbar-light bg-light navbar-expand-lg" id="navbarMain">
+    <span class="navbar-brand"><h1><a href="instructions.html" class="text-reset text-decoration-none">Instructions</a></h1></span>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="nav nav-tabs">
+      <a class="nav-item nav-link active" href="tasks.html">Tasks</a>
+      <a class="nav-item nav-link" href="rviz.html">RViz UI</a>
+      <a class="nav-item nav-link" href="web.html">Web UI</a>
+    </div>
+    </div>
+
+    <ul class="navbar-text">
+      <li><h5><u>Prioritize providing the robot with assistance</u> over your game</h5></li>
+      <li><h5><u>Speak out loud</u> when selecting options in RViz; if possible, mention why</h5></li>
+      <li><h5><u>Speak out loud</u> the reasons for selecting or confirming hypotheses on the Web UI</h5></li>
+    </ul>
+  </nav>
+
+  <!-- Spacer(s) for the first content -->
+  <div class="d-none d-lg-block" style="margin-bottom: 10%;"></div>
+  <div class="d-none d-md-block d-lg-none" style="margin-bottom: 25%;"></div>
+  <div class="d-md-none" style="margin-bottom: 40%;"></div>
+
+  <!-- The tasks -->
+  <section class="row my-2">
+    <div class="col card">
+    <div class="row no-gutters">
+      <div class="col-lg">
+        <div class="card-body">
+          <h4 class="card-title" id="tasks">Tasks</h4>
+          <div class="card-text">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 35%;">Location</th>
+                  <th scope="col" style="width: 65%;">Objects at location</th>
+                </tr>
+              </thead>
+              <tbody class="text-monospace">
+                <tr>
+                  <td class="text-secondary" scope="row">schunk</td>
+                  <td class="text-danger">SMALL_GEAR<br>LARGE_GEAR</td>
+                </tr>
+                <tr>
+                  <td class="text-secondary" scope="row">gearbox_pick</td>
+                  <td class="text-danger">GEARBOX_BOTTOM<br>GEARBOX_TOP</td>
+                </tr>
+                <tr>
+                  <td class="text-secondary" scope="row">screw_bin</td>
+                  <td class="text-danger">BOLT</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Tasks generally require picking up objects at their locations and placing them in the robot's kit.</p>
+            <p>Some notes about the tasks:</p>
+            <ul>
+              <li>Task objects will only ever be at their designated locations; never at another location.</li>
+              <li>The environment will not be static, and other agents (for example, me) might change it from time-to-time.</li>
+              <li>Tasks that cannot be completed without a physical intervention by a human within the arena must be aborted.</li>
+            </ul>
+            <p>Some notes about the <span class="text-monospace text-danger">LARGE_GEAR</span>:</p>
+            <ul>
+              <li>The <span class="text-monospace text-danger">LARGE_GEAR</span> must be 'machined' in the SCHUNK machine before it can be placed in the robot's kit.</li>
+              <li>
+                <div class="media">
+                  <div class="media-body">
+                    <p>The <span class="text-monospace text-danger">LARGE_GEAR</span> must be grabbed along the diameter of its head in order allow for successful gear insertion into the SCHUNK chuck. (example correct grasp in the image)</p>
+                  </div>
+                  <img src="img/valid_gear_grasp.png" alt="Valid gear grasp" class="align-self-center ml-2" style="max-width: 20%; max-height: 80px;">
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <p class="lead">Pick-machine-place <span class="text-monospace">LARGE_GEAR</span> in kit</p>
+            <ul class="list-unstyled">
+              <li class="media mb-4">
+                <div class="mr-2 align-self-center" style="width: 10%;">
+                  <img src="img/large_gear.png" alt="Large Gear" class="img-fluid mb-1">
+                  <img src="img/schunk.png" alt="Schunk" class="img-fluid mb-1">
+                </div>
+                <div class="media-body">
+                  <ol class="px-3">
+                    <li>Grab 1 <span class="text-monospace text-danger">LARGE_GEAR</span> from <span class="text-monospace text-secondary">schunk</span>.</li>
+                    <li>Ensure the in-hand pose of the <span class="text-monospace text-danger">LARGE_GEAR</span> allows for insertion into the SCHUNK.</li>
+                    <li>Insert the gear into the SCHUNK chuck at <span class="text-monospace text-secondary">schunk</span></li>
+                  </ol>
+                </div>
+              </li>
+              <li class="media mb-4">
+                <img src="img/small_gear.png" alt="Small Gear" class="align-self-center mr-2" style="width: 10%;">
+                <div class="media-body">
+                  <ol class="px-3">
+                    <li>Grab 1 <span class="text-monospace text-danger">SMALL_GEAR</span> from <span class="text-monospace text-secondary">schunk</span> and put it in the kit.</li>
+                  </ol>
+                </div>
+              </li>
+              <li class="media mb-4">
+                <div class="mr-2" style="width: 10%;">
+                </div>
+                <div class="media-body">
+                  <ol class="px-3">
+                    <li>Retrieve <span class="text-monospace text-danger">LARGE_GEAR</span> from SCHUNK chuck at <span class="text-monospace text-secondary">schunk</span>.</li>
+                    <li>Put the gear into the kit.</li>
+                  </ol>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="list-group-item">
+            <p class="lead">Pick-place <span class="text-monospace">GEARBOX_BOTTOM</span> in kit</p>
+            <div class="media">
+              <img src="img/gearbox_bottom.png" alt="Gearbox Bottom" class="align-self-center mr-2" style="width: 10%;">
+              <div class="media-body">
+                <p>Grab 1 <span class="text-monospace text-danger">GEARBOX_BOTTOM</span> from <span class="text-monospace text-secondary">gearbox_pick</span> and put it in the kit.</p>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <p class="lead">Pick-place <span class="text-monospace">SMALL_GEAR</span> in kit</p>
+            <div class="media">
+              <img src="img/small_gear.png" alt="Small Gear" class="align-self-center mr-2" style="width: 10%;">
+              <div class="media-body">
+                <p>Grab 1 <span class="text-monospace text-danger">SMALL_GEAR</span> from <span class="text-monospace text-secondary">schunk</span> and put it in the kit.</p>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <p class="lead">Pick-place <span class="text-monospace">GEARBOX_TOP</span> in kit</p>
+            <div class="media">
+              <img src="img/gearbox_top.png" alt="Gearbox Top" class="align-self-center mr-2" style="width: 10%;">
+              <div class="media-body">
+                <p>Grab 1 <span class="text-monospace text-danger">GEARBOX_TOP</span> from <span class="text-monospace text-secondary">gearbox_pick</span> and put it in the kit.</p>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <p class="lead">Pick-place <span class="text-monospace">BOLT</span> in kit</p>
+            <div class="media">
+              <img src="img/bolt.png" alt="Bolt" class="align-self-center mr-2" style="width: 10%;">
+              <div class="media-body">
+                <p>Grab 1 <span class="text-monospace text-danger">BOLT</span> from <span class="text-monospace text-secondary">screw_bin</span> and put it in the kit.</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-5">
+        <img src="img/arena_map.png" alt="Arena Map" class="card-img">
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="row my-3">
+  <div class="col card-deck">
+    <div class="card">
+      <div class="card-header">Video: Pick-machine-place <span class="text-monospace">LARGE_GEAR</span> in kit</div>
+      <div class="embed-responsive embed-responsive-16by9 card-img-top">
+        <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/j2w1FffgD3s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Video: Pick-place <span class="text-monospace">GEARBOX_BOTTOM</span> in kit</div>
+      <div class="embed-responsive embed-responsive-16by9 card-img-top">
+        <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/osNtFxqC1UM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  </section>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

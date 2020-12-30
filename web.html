@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Instructions: Web</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+  <!-- General instructions -->
+  <nav class="navbar fixed-top navbar-light bg-light navbar-expand-lg" id="navbarMain">
+    <span class="navbar-brand"><h1><a href="instructions.html" class="text-reset text-decoration-none">Instructions</a></h1></span>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="nav nav-tabs">
+      <a class="nav-item nav-link" href="tasks.html">Tasks</a>
+      <a class="nav-item nav-link" href="rviz.html">RViz UI</a>
+      <a class="nav-item nav-link active" href="web.html">Web UI</a>
+    </div>
+    </div>
+
+    <ul class="navbar-text">
+      <li><h5><u>Prioritize providing the robot with assistance</u> over your game</h5></li>
+      <li><h5><u>Speak out loud</u> when selecting options in RViz; if possible, mention why</h5></li>
+      <li><h5><u>Speak out loud</u> the reasons for selecting or confirming hypotheses on the Web UI</h5></li>
+    </ul>
+  </nav>
+
+  <!-- Spacer(s) for the first content -->
+  <div class="d-none d-lg-block" style="margin-bottom: 10%;"></div>
+  <div class="d-none d-md-block d-lg-none" style="margin-bottom: 25%;"></div>
+  <div class="d-md-none" style="margin-bottom: 40%;"></div>
+
+  <!-- Web UI -->
+  <section class="row">
+    <div class="col card">
+    <div class="row no-gutters">
+      <div class="col-lg">
+        <div class="card-body">
+          <h4 class="card-title" id="web-ui">Web UI</h4>
+          <div class="card-text">
+            <p>The web interface has 5 sections:</p>
+            <ul>
+              <li><strong>Hypotheses</strong>: allows you to <span class="text-monospace text-success">suspect</span> possible causes of failure, and later <span class="text-monospace text-success">confirm</span> them.</li>
+              <li><strong>Actions</strong>: supplements the <a href="rviz.html">RViz UI</a> in helping you either to find out what's wrong or to correct the failure.</li>
+              <li>
+                <strong>Task</strong>: serves two functions
+                <ul>
+                  <li>It showcases the error information in the current task hierarchy (more on the hierarchy below).</li>
+                  <li>It presents buttons to allow you to choose how to resume the task (<u class="text-danger">please check in with me before resuming execution</u>).</li>
+                </ul>
+              </li>
+              <li><strong>Faults</strong>: reports the status of component-focused background fault monitors.</li>
+              <li><strong>Beliefs</strong>: reports the robot's knowledge of the task, the environment, or itself; represented as boolean predicates.</li>
+            </ul>
+            <p><strong>Note:</strong> If a request for help appears shortly after you have already completed one (within seconds), <u><em>please refresh the page</em></u>.</p>
+            <p>The slides show how the UI might change over the course of the study.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div id="webIntroCarousel" class="carousel slide card-img" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#webIntroCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#webIntroCarousel" data-slide-to="1"></li>
+            <li data-target="#webIntroCarousel" data-slide-to="2"></li>
+            <li data-target="#webIntroCarousel" data-slide-to="3"></li>
+            <li data-target="#webIntroCarousel" data-slide-to="4"></li>
+            <li data-target="#webIntroCarousel" data-slide-to="5"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="600000">
+              <img src="img/web_none.png" alt="Web: none" class="d-block w-100">
+              <div class="carousel-caption d-none d-md-block">
+                <p class="bg-dark" style="opacity: 0.75">1. The UI when there is no task failure</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-interval="600000">
+              <img src="img/web_start.png" alt="Web: start" class="d-block w-100">
+              <div class="carousel-caption d-none d-md-block">
+                <p class="bg-dark" style="opacity: 0.75">2. At the start of a task failure</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-interval="30000">
+              <img src="img/web_start_ax_suggestions.png" alt="Web: start" class="d-block w-100">
+              <div class="carousel-caption d-none d-md-block">
+                <p class="bg-dark" style="opacity: 0.75">3. Sometimes the system can provide suggestions of error causes and of possible actions to take</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-interval="30000">
+              <img src="img/web_suspected.png" alt="Web: suspected" class="d-block w-100">
+              <div class="carousel-caption d-none d-md-block">
+                <p class="bg-dark" style="opacity: 0.75">4. Suspecting hypotheses enables the actions</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-interval="30000">
+              <img src="img/web_action_executing.png" alt="Web: action execution" class="d-block w-100">
+              <div class="carousel-caption d-none d-md-block">
+                <p class="bg-dark" style="opacity: 0.75">5. An action (<span class="text-monospace">arm</span>) is executing</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-interval="30000">
+              <img src="img/web_action_result.png" alt="Web: action result" class="d-block w-100">
+              <div class="carousel-caption d-none d-md-block">
+                <p class="bg-dark" style="opacity: 0.75">6. An action (<span class="text-monospace">arm</span>) has returned the result (<span class="text-monospace">ABORTED</span>)</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-interval="600000">
+              <img src="img/web_confirmed.png" alt="Web: confirmed" class="d-block w-100">
+              <div class="carousel-caption d-none d-md-block">
+                <p class="bg-dark" style="opacity: 0.75">7. Confirming hypotheses enables the resumption of the task; further actions can still be taken, if required</p>
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#webIntroCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark"></span>
+          </a>
+          <a class="carousel-control-next" href="#webIntroCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon bg-dark"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="row my-3">
+  <div class="col card-columns">
+    <div class="card">
+      <div class="card-header">Hypotheses</div>
+      <div class="card-body">
+        <div class="card-text">
+          <ul>
+            <li>You can <span class="text-monospace text-success">suspect</span> (select) possible causes of error using the dropdowns.</li>
+            <li>You need to suspect at least 1 hypothesis in order to take actions.</li>
+            <li>You can <span class="text-monospace text-success">confirm</span> suspected hypotheses using the checkbox.</li>
+            <li>You need to confirm at least 1 hypothesis in order to resume the task.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails0">
+            WiFi: Bad Signal
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails0" class="row collapse">
+        <div class="col">
+          <p>The robot is experiencing poor WiFi signal.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails1">
+            E-Stop: Triggered
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails1" class="row collapse">
+        <div class="col">
+          <p>An E-Stop (hardware or software) has been triggered; the robot will not move its actuators. During this time, RViz will not reflect the true pose of the robot accurately.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails2">
+            Base: Mislocalized
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails2" class="row collapse">
+        <div class="col">
+          <p>The base is mislocalized in the map: the robot thinks it is somewhere it is not.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails3">
+            Base: Stalled
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails3" class="row collapse">
+        <div class="col">
+          <p>The robot base cannot move because its caster wheels are misaligned with the direction of travel and the current motor commands are not enough to realign them on the carpet; some other base motor commands might be needed.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails4">
+            Arm: Planning or motion failure
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails4" class="row collapse">
+        <div class="col">
+          <p>Arm motion planning did not succeed either during planning or during execution. Common causes include obstacles in the planning scene, unexpected contacts, rapid planning scene updates, etc.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails5">
+            Perception: Object not recognized
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails5" class="row collapse">
+        <div class="col">
+          <p>A perception failure where either a) the desired object is in view and it was misclassified (possibly due to clutter or noise), or b) the desired object is not in view, but another (wrong) object was misidentified as the desired object.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails6">
+            Perception: Object not in view
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails6" class="row collapse">
+        <div class="col">
+          <p>The desired object is not in the robot's current view.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails7">
+            Perception: Other transient error
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails7" class="row collapse">
+        <div class="col">
+          <p>A transient perception error, such as a momentarily delayed or malformed point cloud.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails8">
+            Grasp: Bad or no grasps calculated
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails8" class="row collapse">
+        <div class="col">
+          <p>A failure in grasp calculation where either a) no grasps were calculated, or b) the calculated grasps were bad, e.g.: too far away, unreachable, in collision with the environment, etc.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails9">
+            Grasp: Current grasp is incorrect
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails9" class="row collapse">
+        <div class="col">
+          <p>A failure where either a) there is nothing in the gripper, or b) the current object in the gripper is grasped incorrectly.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails10">
+            Schunk: Insert failed
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails10" class="row collapse">
+        <div class="col">
+          <p>All attempts at inserting the gear into the SCHUNK chuck failed.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails11">
+            Schunk: Cannot retrieve gear
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails11" class="row collapse">
+        <div class="col">
+          <p>The large gear cannot be retrieved from the SCHUNK chuck: it is either inaccessible or it fell from the chuck.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails12">
+            Object: Fell from gripper
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails12" class="row collapse">
+        <div class="col">
+          <p>The object that was in the gripper fell out; most likely caused by a poor grasp on the object.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#hypothesisDetails13">
+            Unknown
+          </button>
+        </div>
+      </div>
+      <div id="hypothesisDetails13" class="row collapse">
+        <div class="col">
+          <p>The failure, or its cause, are unknown. Please be frugal in choosing this option.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Faults &amp; Beliefs</div>
+      <div class="card-body">
+        <div class="card-text">
+          <p>Fault monitors are background monitors that periodically check the status of robot components:</p>
+          <ul>
+            <li>If there is a fault in the component, the monitor status show <span class="text-monospace"><u>fault</u></span></li>
+            <li>If there is no error, the monitor status shows <span class="text-monospace"><u>nominal</u></span></li>
+          </ul>
+          <p>Beliefs are boolean predicates that capture the robot's knowledge of the task, the environment, or itself:</p>
+          <ul>
+            <li>A belief can evaluate to <span class="text-monospace"><u>true</u></span></li>
+            <li>A belief can evaluate to <span class="text-monospace"><u>false</u></span></li>
+            <li>If there is not enough information for a belief, such as if it is irrelevant to the task or environment at hand, then the belief can evaluate to <span class="text-monospace"><u>none</u></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Actions</div>
+      <div class="card-body">
+        <ul class="card-text">
+          <li>The results of executing actions are displayed in the <strong><em>Status</em></strong> section. Some actions return additional details in their results that can inform your next steps.</li>
+          <li>
+            For <strong>safety</strong> reasons, please be aware:
+            <ul>
+              <li>Base movements <u>do not</u> perform collision checking.</li>
+              <li>Please <u>read the descriptions</u> of actions before executing them because actions can have consequences that are a surprise to some.</li>
+            </ul>
+          </li>
+          <li>Generally, please wait for an action to return a result before issuing another one. <u>If in doubt, ask me</u>.</li>
+        </ul>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails0">
+            Relocalize
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails0" class="row collapse">
+        <div class="col">
+          <p>The action is available in the <a href="rviz.html">RViz interface</a> as <span class="text-monospace text-success">2D Pose Estimate</span>. <em>Usage</em>:</p>
+          <ol>
+            <li>Select the tool from the top bar in RViz</li>
+            <li>When you have an estimate of the robot's true position, click-and-drag at that location on the map: <em>click</em> at the approximate location, and <em>drag</em> such that the green arrow indicates the approximate heading of the robot.</li>
+            <li>Additional movements of the robot base might be necessary to allow the robot to refine its approximate location estimate.</li>
+          </ol>
+          <p>Remember that this does not actually move the robot; it only updates where the robot thinks it is in the map.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails1">
+            Release E-Stop
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails1" class="row collapse">
+        <div class="col">
+          <p>Attempt a software reset by releasing the software E-Stop. Note that the actuators will reset---the gripper will open and gravity compensation on the arm might cause the arm to drift (based on the arm's pose and payload at startup).</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails9">
+            Look Around
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails9" class="row collapse">
+        <div class="col">
+          <p>Move the head around to survey the environment around the robot with the RGBD camera.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails3">
+            Wiggle Base
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails3" class="row collapse">
+        <div class="col">
+          <p>Make a short left, right, back movement with the base.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails4">
+            Go To Origin
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails4" class="row collapse">
+        <div class="col">
+          <p>Navigate to the <a href="tasks.html"><span class="text-monospace">origin</span></a> in the map. Remember that there is no collision checking performed during navigation.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails5">
+            Reposition 0.5m to the left / right
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails5" class="row collapse">
+        <div class="col">
+          <p>Navigate back towards the <a href="tasks.html"><span class="text-monospace">origin</span></a>. Then navigate to a pose 0.5m to the left or right of the starting pose. Remember that there is no collision checking performed during navigation.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails2">
+            Open Gripper
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails2" class="row collapse">
+        <div class="col">
+          <p>Open the gripper. Any object currently in the gripper will fall out. Also note that the <a href="rviz.html"><span class="text-monospace">PlanningScene</span></a> is not updated when this action is used.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails7">
+            Verify current grasp
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails7" class="row collapse">
+        <div class="col">
+          <p>If the gripper is closed, then check to see if there is something in the gripper and return a boolean value indicating if something is grasped or not.</p>
+          <p>There is no guarantee on the returned data if the gripper is open.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails8">
+            Reload octomap
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails8" class="row collapse">
+        <div class="col">
+          <p>Clear the <a href="rviz.html"><span class="text-monospace">PlanningScene</span></a> used for arm motion planning, and reinitialize it from the saved <a href="rviz.html"><span class="text-monospace">StaticOctomap</span></a>. Note that while this action may clear obstacles that are not already in the octomap, collision objects added programmatically to the <span class="text-monospace text-success">PlanningScene</span> will not be affected.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails10">
+            Move arm to ready pose
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails10" class="row collapse">
+        <div class="col">
+          <div class="media">
+            <img src="img/ready_pose.png" alt="Ready pose" class="align-self-center mr-2" style="width: 30%;">
+            <div class="media-body">
+              <p>Use motion planning to move the arm to the pose shown in the image.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails11">
+            Segment Image
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails11" class="row collapse">
+        <div class="col">
+          <p>Segment individual object point clouds from a table-top. Note that a table-top must be in the robot's current point cloud. The action returns the number of individual object segments that are found on the table-top. If the number of segments is 0, the action returns an <span class="text-monospace text-danger">ABORTED</span> status.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails12">
+            Classify Segmented Objects
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails12" class="row collapse">
+        <div class="col">
+          <p>Assuming a previous execution of <span class="text-monospace text-success">segment</span> (above), run classification on each of the segmented object point clouds. If successful, return a dictionary mapping the segmented object id (visible in <a href="rviz.html">RViz</a>) to the object's class or the class <span class="text-monospace">NONE</span></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails6">
+            Dropoff current object in the gripper
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails6" class="row collapse">
+        <div class="col">
+          <p>Navigate to the <a href="tasks.html"><span class="text-monospace">dropoff</span></a> location and place the object that is currently in the gripper over there. The robot ends up at <span class="text-monospace text-secondary">dropoff</span> with the arm in the ready position (see above).</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-outline-dark btn-block border" type="button" data-toggle="collapse" data-target="#actionDetails13">
+            Stir the bolts bin
+          </button>
+        </div>
+      </div>
+      <div id="actionDetails13" class="row collapse">
+        <div class="col">
+          <p>Navigate to the bolts bin at <a href="tasks.html"><span class="text-monospace">screw_bin</span></a> and replay a pre-recorded arm motion to stir the bolts. The robot ends up at <span class="text-monospace text-secondary">screw_bin</span> with the arm in the ready position (see above).</p>
+          <p><em>Do NOT</em> execute another action while this action is executing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Task</div>
+      <div class="card-body">
+      <div class="card-text">
+        <p>Tasks are specified as a hierarchy of subtasks and primitive actions that are executed in sequence. An example (primitive actions are coloured in yellow):</p>
+
+        <img src="img/task_hierarchy.png" alt="Task hierarchy" class="img-fluid mx-auto my-3">
+
+        <p>Consider a failure in the <span class="text-monospace text-secondary">arm</span> action (<small><em>press the buttons</em></small>):</p>
+
+        <div class="row mb-3">
+          <div class="col p-0">
+            <button type="button" class="btn btn-outline-dark btn-block" data-toggle="collapse" data-target="#taskFailHierarchy">Toggle Hierarchy Display</button>
+          </div>
+          <div class="col p-0">
+            <button type="button" class="btn btn-outline-dark btn-block" data-toggle="collapse" data-target="#taskFailUI">Toggle UI Display</button>
+          </div>
+        </div>
+        <div class="row">
+          <div id="taskFailHierarchy" class="col collapse mb-3">
+            <img src="img/task_failure.png" alt="Task failure" class="img-fluid">
+          </div>
+
+          <div id="taskFailUI" class="col collapse mb-3">
+            <div class="row">
+              <img src="img/task_ui_failure.png" alt="Task failure in UI" class="img-fluid">
+            </div>
+            <div class="row">
+              <img src="img/task_ui_failure_history.png" alt="Task failure action history in UI" class="img-fluid">
+            </div>
+          </div>
+        </div>
+
+        <p>On a failure, we show:</p>
+        <ul>
+          <li>The name of the task</li>
+          <li>The last 15 primitive actions that were executed; <em>regardless of whether they were successful or not</em>.</li>
+          <li>Details of the subtasks and actions in the currently executing task.</li>
+        </ul>
+
+        <p>For each of the active levels in the hierarchy, we show:</p>
+        <ul>
+          <li>The number of times the subtask or action has failed.</li>
+          <li>The position (index) of the child subtask or action that was being executed.</li>
+          <li>The parameters that were sent to each of the subtasks</li>
+        </ul>
+
+        <p><strong>Note</strong>: the information in the hierarchy displays what the robot <em>should</em> execute, and not necessarily what it actually executed.</p>
+
+        <p>When you are ready to resume from a failure, the buttons in the UI allow you to specify where in this hierarchy to resume. Since you might not be familiar with the full task hierarchy, <span class="text-danger"><u>check with me before clicking on a button to resume</u></span>.</p>
+
+        <div class="row mb-3">
+          <div class="col p-0">
+            <button type="button" class="btn btn-outline-dark btn-block" data-toggle="collapse" data-target="#taskResumeUI">Toggle UI Display</button>
+          </div>
+          <div class="col p-0">
+            <button type="button" class="btn btn-outline-dark btn-block" data-toggle="collapse" data-target="#taskResumeFlowchart">Toggle Flowchart Display</button>
+          </div>
+        </div>
+        <div class="row">
+          <div id="taskResumeUI" class="col collapse mb-3">
+            <img src="img/task_ui_resume.png" alt="Task resume in UI" class="img-fluid">
+          </div>
+
+          <div id="taskResumeFlowchart" class="col collapse mb-3">
+            <img src="img/task_resume.png" alt="Task resume" class="img-fluid">
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+  </section>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
